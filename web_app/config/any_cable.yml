@@ -5,3 +5,7 @@ production:
 development:
   rpc_host: "web:50051"
   log_level: debug
+
+test:
+  rpc_host: "web:50051"
+  log_level: debug
