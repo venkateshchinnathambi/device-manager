@@ -5,7 +5,7 @@ class ThermostatUpdateConsumer < Racecar::Consumer
     def process(message)
         payload = JSON.parse(message.value)
         Rails.logger.info("message #{payload}")
-        #ActionCable.server.broadcast("thermostat",payload)
+        # ActionCable.server.broadcast("thermostat",payload)
         ThermostatBroadcasterService.new(payload).call
     end
 end
