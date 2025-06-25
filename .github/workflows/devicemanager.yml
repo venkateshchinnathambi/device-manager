@@ -1,0 +1,88 @@
+name: CI for DeviceManager
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-rails:
+    name: Rails Tests (web_app)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web_app
+
+    services:
+      db:
+        image: postgres:15
+        env:
+          POSTGRES_DB: device_manager
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: venkatesh
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+
+    env:
+      RAILS_ENV: test
+      PG_HOST: localhost
+      PG_PORT: 5432
+      PG_USER: postgres
+      PG_PASSWORD: venkatesh
+      PG_DB: device_manager
+      REDIS_URL: redis://localhost:6379/1
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Setup Database
+        run: |
+          bin/rails db:create
+          bin/rails db:schema:load
+
+      - name: Run RSpec
+        run: bundle exec rspec
+
+  test-go:
+    name: Go Tests (grpc)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./grpc
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22
+
+      - name: Get dependencies
+        run: go mod tidy
+
+      - name: Run tests
+        run: go test ./...
+

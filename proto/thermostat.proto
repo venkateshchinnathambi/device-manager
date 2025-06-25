@@ -1,0 +1,44 @@
+
+syntax = "proto3";
+
+option go_package = "device-manager/proto;thermostatpb";
+package thermostat;
+
+
+message TemperatureSetPointUpdated{
+    optional DeviceId device_id =1;
+    optional SetPoints set_points =2;
+    optional int32 timestamp =3;
+}
+
+message SetPoints{
+    optional Temperature cool_set_point =1;
+    optional Temperature heat_set_point =2;
+}
+
+message DeviceId{
+    optional string id = 1;
+}
+
+message IndoorTemperatueUpdated{
+    optional DeviceId device_id =1;
+    optional Temperature temperature =2;
+    optional int32 timestamp =3;
+}
+
+message Temperature{
+    enum Scale{
+        F = 0;
+        C = 1;
+    }
+    optional Scale scale =1;
+    optional string value =2;
+
+}
+
+message Event{
+    oneof event_type{
+        TemperatureSetPointUpdated set_points_updated =1;
+        IndoorTemperatueUpdated indoor_temperature_updated = 2;
+    }
+}
