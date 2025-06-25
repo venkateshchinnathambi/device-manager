@@ -55,3 +55,5 @@ gem "redis", "~> 5.4"
 gem "anycable-rails", "~> 1.6"
 
 gem "grpc", "~> 1.73"
+
+gem "rspec", "~> 3.13"
