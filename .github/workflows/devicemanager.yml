@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./grpc
+        working-directory: ./device_core
 
     steps:
       - uses: actions/checkout@v4

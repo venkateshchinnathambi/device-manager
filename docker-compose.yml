@@ -54,7 +54,7 @@ services:
 
   grpc:
     build:
-      context: .
+      context: ./device_core
       dockerfile: Dockerfile
     depends_on:
       - db
