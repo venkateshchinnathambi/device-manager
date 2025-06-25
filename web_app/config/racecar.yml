@@ -1,0 +1,11 @@
+development:
+  brokers:
+    - kafka:9092
+  client_id: thermostat_device_manager
+  group_id: thermostat_update_consumer_group
+
+production:
+  brokers:
+    - kafka:9092
+  client_id: thermostat_device_manager
+  group_id: thermostat_update_consumer_group

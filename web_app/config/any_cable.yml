@@ -1,0 +1,7 @@
+production:
+  rpc_host: "web:50051"
+  log_level: debug
+
+development:
+  rpc_host: "web:50051"
+  log_level: debug
