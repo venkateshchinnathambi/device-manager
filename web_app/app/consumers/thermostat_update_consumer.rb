@@ -1,5 +1,5 @@
 require "ostruct"
-class ThermostatUpdateConsumer < Racecar::Consumer 
+class ThermostatUpdateConsumer < Racecar::Consumer
     subscribes_to "thermostat.updates"
 
     def process(message)

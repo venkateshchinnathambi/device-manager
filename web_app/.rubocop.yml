@@ -8,5 +8,6 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 #   Enabled: false
 AllCops:
   TargetRubyVersion: 3.2
+Lint/Syntax:
   Exclude:
     - "app/views/**/*"
