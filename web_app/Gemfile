@@ -57,3 +57,5 @@ gem "anycable-rails", "~> 1.6"
 gem "grpc", "~> 1.73"
 
 gem "rspec", "~> 3.13"
+
+gem "rubocop-erb", "~> 0.6.0"
