@@ -60,7 +60,7 @@ jobs:
       - name: Setup Database
         run: |
           bin/rails db:create
-          bin/rails db:schema:load
+          bin/rails db:migrate
 
       - name: Run RSpec
         run: bundle exec rspec
