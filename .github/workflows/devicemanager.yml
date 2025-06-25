@@ -64,7 +64,9 @@ jobs:
 
       - name: Run RSpec
         run: bundle exec rspec
-
+      - name: RuboCop
+        run: bundle exec rubocop
+      
   test-go:
     name: Go Tests (grpc)
     runs-on: ubuntu-latest
@@ -85,4 +87,7 @@ jobs:
 
       - name: Run tests
         run: go test ./...
+
+      - name: Go Lint
+        run: go vet ./...
 
