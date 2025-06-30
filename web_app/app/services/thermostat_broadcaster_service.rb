@@ -1,7 +1,7 @@
 # app/services/thermostat_broadcaster_service.rb
 
 class ThermostatBroadcasterService
-  CHANNEL_NAME = "thermostat"
+  CHANNEL_NAME = "ThermostatChannel"
 
   def initialize(payload)
     @payload = payload

@@ -1,9 +1,10 @@
 package main
 
 import (
-	thermostatpb "device-manager/proto"
 	"fmt"
 	"net"
+
+	thermostatpb "device-manager/proto"
 
 	"google.golang.org/protobuf/proto"
 )
