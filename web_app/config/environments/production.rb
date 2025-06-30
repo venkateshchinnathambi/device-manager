@@ -91,6 +91,6 @@ Rails.application.config.hosts << "localhost"
 Rails.application.config.hosts << "web"
 config.action_cable.disable_request_forgery_protection = true
 config.after_initialize do
-  AnyCable.logger.info "Rails AnyCable RPC server initialized"
+  AnyCable.logger.info "Rails AnyCable RPC server initialized" 
 end
 end

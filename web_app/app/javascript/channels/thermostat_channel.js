@@ -3,12 +3,12 @@ import consumer from "channels/consumer"
 consumer.subscriptions.create("ThermostatChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
-     console.log("Connect to ThermostatChannel")
+     console.log("Connected to ThermostatChannel")
   },
 
   disconnected() {
     // Called when the subscription has been terminated by the server
-         console.log("Dis Connected to ThermostatChannel")
+         console.log("Disconnected from ThermostatChannel")
   },
 
   received(data) {
