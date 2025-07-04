@@ -18,10 +18,13 @@ services:
       - "5432:5432"
   web:
     build:
-      context: .
+      context: ./web_app
+      dockerfile: Dockerfile    
+    volumes:
+      - ./web_app:/app      
+    command: bundle exec rails server -b 0.0.0.0 -p 3010
     ports:
-      - "3010:3010"
-      - "50051:50051"
+      - "3010:3010"     
     depends_on:
       - db
       - redis
@@ -32,9 +35,15 @@ services:
       - PG_DB=device_manager
       - PG_PORT=5432
       - REDIS_URL=redis://redis:6379/1
+      - ANYCABLE_RPC_SECRET=42dc970ba19a926c1bfdf752f19b7fe0
+      - ANYCABLE_RPC_HOST=anycable-rpc:50051
+      - DATABASE_URL=postgres://postgres:venkatesh@db:5432/device_manager
+      - RAILS_ENV=production
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=venkatesh
+      - POSTGRES_HOST=db
+      - RAILS_MASTER_KEY="e0c91999021681e45fbd887b3cf34201"
    
-    image: rails-placeholder
-
 
   influxdb:
     image: influxdb:1.8
@@ -99,21 +108,62 @@ services:
     depends_on:
       - kafka
       - zookeeper
+      
+  anycable-rpc:
+    build:
+      context: ./web_app
+    command: bundle exec anycable
+    volumes:
+      - ./web_app:/app
+    depends_on:
+      - redis
+      - db
+    environment:
+      - REDIS_URL=redis://redis:6379/1       
+      - RAILS_ENV=production
+      - RAILS_MASTER_KEY=e0c91999021681e45fbd887b3cf34201
+      - SECRET_KEY_BASE=a7aa7ea2608386f9d49b05e7062667b3c745574d8e04d7393b689a8f48100f42d1e212bf8690543c9a06d7c33c9e307fc8a1373fe99729cd1cfb5d98008499e9
+      - ANYCABLE_RPC_SECRET=42dc970ba19a926c1bfdf752f19b7fe0
+      - ANYCABLE_RPC_HOST=0.0.0.0
+      - ANYCABLE_RPC_PORT=50051
+      - ANYCABLE_LOG_LEVEL=trace
+      #- ANYCABLE_RPC_TLS_CERT=/ssl/server.crt
+      #- ANYCABLE_RPC_TLS_KEY=/ssl/server.key
+    #healthcheck:
+     # test: ["CMD", "sh", "-c", "nc -z localhost 50051"]
+     # interval: 5s
+     # timeout: 3s
+     # retries: 5
+
+    ports:
+      - "50051:50051"
+      
   anycable:
     image: anycable/anycable-go
     ports:
       - "3334:8080" # This is the public WebSocket port
     environment:
       - ANYCABLE_REDIS_URL=redis://redis:6379/1
-      - ANYCABLE_RPC_HOST=web:50051
-      - ANYCABLE_LOG_LEVEL=debug
+      - ANYCABLE_LOG_LEVEL=trace
       - ANYCABLE_DEBUG=true
       - ANYCABLE_HOST=0.0.0.0 
+      - ANYCABLE_RPC_HOST=anycable-rpc:50051 
+      - ANYCABLE_RPC_SECRET=42dc970ba19a926c1bfdf752f19b7fe0
+     # - ANYCABLE_RPC_TLS=true                     
+     # - ANYCABLE_RPC_TLS_SKIP_VERIFY=true
     depends_on:
-      - redis
+      - anycable-rpc        
+      - redis       
       - web
-
- 
+       
+    restart: on-failure
+    #healthcheck:
+    #  test:  ["CMD", "sh", "-c", "nc -z anycable-rpc 50051"]
+    #  interval: 5s
+    #  timeout: 3s
+    #  retries: 5
+  
+   
 
 volumes:
   thermostat_db_data:

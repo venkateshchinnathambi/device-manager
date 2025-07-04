@@ -1,11 +1,19 @@
+<% puts "DEBUG ERB: ANYCABLE_RPC_SECRET = #{ENV['ANYCABLE_RPC_SECRET'].inspect}" %>
+<% puts "DEBUG ERB: ANYCABLE_RPC_HOST = #{ENV['ANYCABLE_RPC_HOST'].inspect}" %>
+<% puts "DEBUG ERB: ANYCABLE_RPC_PORT = #{ENV['ANYCABLE_RPC_PORT'].inspect}" %>
+
 production:
-  rpc_host: "web:50051"
+  rpc_host: <%= ENV["ANYCABLE_RPC_HOST"] || "0.0.0.0" %>
+  rpc_port: <%= ENV["ANYCABLE_RPC_PORT"] || "50051" %>
   log_level: debug
+  rpc_secret: <%= ENV.fetch("ANYCABLE_RPC_SECRET", "fallback-secret") %>
 
 development:
-  rpc_host: "web:50051"
+  rpc_host: <%= ENV["ANYCABLE_RPC_HOST"] || "0.0.0.0" %>
+  rpc_port: <%= ENV["ANYCABLE_RPC_PORT"] || "50051" %>
   log_level: debug
 
 test:
-  rpc_host: "web:50051"
+  rpc_host: <%= ENV.fetch("ANYCABLE_RPC_SERVER", "localhost") %>
+  rpc_port: 50051
   log_level: debug
