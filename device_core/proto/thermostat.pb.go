@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v4.24.4
-// source: proto/thermostat.proto
+// source: thermostat.proto
 
 package thermostatpb
 
@@ -51,11 +51,11 @@ func (x Temperature_Scale) String() string {
 }
 
 func (Temperature_Scale) Descriptor() protoreflect.EnumDescriptor {
-	return file_proto_thermostat_proto_enumTypes[0].Descriptor()
+	return file_thermostat_proto_enumTypes[0].Descriptor()
 }
 
 func (Temperature_Scale) Type() protoreflect.EnumType {
-	return &file_proto_thermostat_proto_enumTypes[0]
+	return &file_thermostat_proto_enumTypes[0]
 }
 
 func (x Temperature_Scale) Number() protoreflect.EnumNumber {
@@ -64,7 +64,59 @@ func (x Temperature_Scale) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Temperature_Scale.Descriptor instead.
 func (Temperature_Scale) EnumDescriptor() ([]byte, []int) {
-	return file_proto_thermostat_proto_rawDescGZIP(), []int{4, 0}
+	return file_thermostat_proto_rawDescGZIP(), []int{5, 0}
+}
+
+type DeviceMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Event         *Event                 `protobuf:"bytes,2,opt,name=event,proto3" json:"event,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeviceMessage) Reset() {
+	*x = DeviceMessage{}
+	mi := &file_thermostat_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeviceMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeviceMessage) ProtoMessage() {}
+
+func (x *DeviceMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_thermostat_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeviceMessage.ProtoReflect.Descriptor instead.
+func (*DeviceMessage) Descriptor() ([]byte, []int) {
+	return file_thermostat_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *DeviceMessage) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+func (x *DeviceMessage) GetEvent() *Event {
+	if x != nil {
+		return x.Event
+	}
+	return nil
 }
 
 type TemperatureSetPointUpdated struct {
@@ -78,7 +130,7 @@ type TemperatureSetPointUpdated struct {
 
 func (x *TemperatureSetPointUpdated) Reset() {
 	*x = TemperatureSetPointUpdated{}
-	mi := &file_proto_thermostat_proto_msgTypes[0]
+	mi := &file_thermostat_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -90,7 +142,7 @@ func (x *TemperatureSetPointUpdated) String() string {
 func (*TemperatureSetPointUpdated) ProtoMessage() {}
 
 func (x *TemperatureSetPointUpdated) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_thermostat_proto_msgTypes[0]
+	mi := &file_thermostat_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -103,7 +155,7 @@ func (x *TemperatureSetPointUpdated) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TemperatureSetPointUpdated.ProtoReflect.Descriptor instead.
 func (*TemperatureSetPointUpdated) Descriptor() ([]byte, []int) {
-	return file_proto_thermostat_proto_rawDescGZIP(), []int{0}
+	return file_thermostat_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *TemperatureSetPointUpdated) GetDeviceId() *DeviceId {
@@ -137,7 +189,7 @@ type SetPoints struct {
 
 func (x *SetPoints) Reset() {
 	*x = SetPoints{}
-	mi := &file_proto_thermostat_proto_msgTypes[1]
+	mi := &file_thermostat_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -149,7 +201,7 @@ func (x *SetPoints) String() string {
 func (*SetPoints) ProtoMessage() {}
 
 func (x *SetPoints) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_thermostat_proto_msgTypes[1]
+	mi := &file_thermostat_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -162,7 +214,7 @@ func (x *SetPoints) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetPoints.ProtoReflect.Descriptor instead.
 func (*SetPoints) Descriptor() ([]byte, []int) {
-	return file_proto_thermostat_proto_rawDescGZIP(), []int{1}
+	return file_thermostat_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SetPoints) GetCoolSetPoint() *Temperature {
@@ -188,7 +240,7 @@ type DeviceId struct {
 
 func (x *DeviceId) Reset() {
 	*x = DeviceId{}
-	mi := &file_proto_thermostat_proto_msgTypes[2]
+	mi := &file_thermostat_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -200,7 +252,7 @@ func (x *DeviceId) String() string {
 func (*DeviceId) ProtoMessage() {}
 
 func (x *DeviceId) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_thermostat_proto_msgTypes[2]
+	mi := &file_thermostat_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -213,7 +265,7 @@ func (x *DeviceId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeviceId.ProtoReflect.Descriptor instead.
 func (*DeviceId) Descriptor() ([]byte, []int) {
-	return file_proto_thermostat_proto_rawDescGZIP(), []int{2}
+	return file_thermostat_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DeviceId) GetId() string {
@@ -234,7 +286,7 @@ type IndoorTemperatueUpdated struct {
 
 func (x *IndoorTemperatueUpdated) Reset() {
 	*x = IndoorTemperatueUpdated{}
-	mi := &file_proto_thermostat_proto_msgTypes[3]
+	mi := &file_thermostat_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -246,7 +298,7 @@ func (x *IndoorTemperatueUpdated) String() string {
 func (*IndoorTemperatueUpdated) ProtoMessage() {}
 
 func (x *IndoorTemperatueUpdated) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_thermostat_proto_msgTypes[3]
+	mi := &file_thermostat_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -259,7 +311,7 @@ func (x *IndoorTemperatueUpdated) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IndoorTemperatueUpdated.ProtoReflect.Descriptor instead.
 func (*IndoorTemperatueUpdated) Descriptor() ([]byte, []int) {
-	return file_proto_thermostat_proto_rawDescGZIP(), []int{3}
+	return file_thermostat_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *IndoorTemperatueUpdated) GetDeviceId() *DeviceId {
@@ -293,7 +345,7 @@ type Temperature struct {
 
 func (x *Temperature) Reset() {
 	*x = Temperature{}
-	mi := &file_proto_thermostat_proto_msgTypes[4]
+	mi := &file_thermostat_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -305,7 +357,7 @@ func (x *Temperature) String() string {
 func (*Temperature) ProtoMessage() {}
 
 func (x *Temperature) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_thermostat_proto_msgTypes[4]
+	mi := &file_thermostat_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -318,7 +370,7 @@ func (x *Temperature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Temperature.ProtoReflect.Descriptor instead.
 func (*Temperature) Descriptor() ([]byte, []int) {
-	return file_proto_thermostat_proto_rawDescGZIP(), []int{4}
+	return file_thermostat_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Temperature) GetScale() Temperature_Scale {
@@ -348,7 +400,7 @@ type Event struct {
 
 func (x *Event) Reset() {
 	*x = Event{}
-	mi := &file_proto_thermostat_proto_msgTypes[5]
+	mi := &file_thermostat_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -360,7 +412,7 @@ func (x *Event) String() string {
 func (*Event) ProtoMessage() {}
 
 func (x *Event) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_thermostat_proto_msgTypes[5]
+	mi := &file_thermostat_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -373,7 +425,7 @@ func (x *Event) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Event.ProtoReflect.Descriptor instead.
 func (*Event) Descriptor() ([]byte, []int) {
-	return file_proto_thermostat_proto_rawDescGZIP(), []int{5}
+	return file_thermostat_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Event) GetEventType() isEvent_EventType {
@@ -417,12 +469,15 @@ func (*Event_SetPointsUpdated) isEvent_EventType() {}
 
 func (*Event_IndoorTemperatureUpdated) isEvent_EventType() {}
 
-var File_proto_thermostat_proto protoreflect.FileDescriptor
+var File_thermostat_proto protoreflect.FileDescriptor
 
-const file_proto_thermostat_proto_rawDesc = "" +
+const file_thermostat_proto_rawDesc = "" +
 	"\n" +
-	"\x16proto/thermostat.proto\x12\n" +
-	"thermostat\"\xdd\x01\n" +
+	"\x10thermostat.proto\x12\n" +
+	"thermostat\"N\n" +
+	"\rDeviceMessage\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12'\n" +
+	"\x05event\x18\x02 \x01(\v2\x11.thermostat.EventR\x05event\"\xdd\x01\n" +
 	"\x1aTemperatureSetPointUpdated\x126\n" +
 	"\tdevice_id\x18\x01 \x01(\v2\x14.thermostat.DeviceIdH\x00R\bdeviceId\x88\x01\x01\x129\n" +
 	"\n" +
@@ -465,56 +520,58 @@ const file_proto_thermostat_proto_rawDesc = "" +
 	"event_typeB#Z!device-manager/proto;thermostatpbb\x06proto3"
 
 var (
-	file_proto_thermostat_proto_rawDescOnce sync.Once
-	file_proto_thermostat_proto_rawDescData []byte
+	file_thermostat_proto_rawDescOnce sync.Once
+	file_thermostat_proto_rawDescData []byte
 )
 
-func file_proto_thermostat_proto_rawDescGZIP() []byte {
-	file_proto_thermostat_proto_rawDescOnce.Do(func() {
-		file_proto_thermostat_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_thermostat_proto_rawDesc), len(file_proto_thermostat_proto_rawDesc)))
+func file_thermostat_proto_rawDescGZIP() []byte {
+	file_thermostat_proto_rawDescOnce.Do(func() {
+		file_thermostat_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_thermostat_proto_rawDesc), len(file_thermostat_proto_rawDesc)))
 	})
-	return file_proto_thermostat_proto_rawDescData
+	return file_thermostat_proto_rawDescData
 }
 
-var file_proto_thermostat_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_thermostat_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_proto_thermostat_proto_goTypes = []any{
+var file_thermostat_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_thermostat_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_thermostat_proto_goTypes = []any{
 	(Temperature_Scale)(0),             // 0: thermostat.Temperature.Scale
-	(*TemperatureSetPointUpdated)(nil), // 1: thermostat.TemperatureSetPointUpdated
-	(*SetPoints)(nil),                  // 2: thermostat.SetPoints
-	(*DeviceId)(nil),                   // 3: thermostat.DeviceId
-	(*IndoorTemperatueUpdated)(nil),    // 4: thermostat.IndoorTemperatueUpdated
-	(*Temperature)(nil),                // 5: thermostat.Temperature
-	(*Event)(nil),                      // 6: thermostat.Event
+	(*DeviceMessage)(nil),              // 1: thermostat.DeviceMessage
+	(*TemperatureSetPointUpdated)(nil), // 2: thermostat.TemperatureSetPointUpdated
+	(*SetPoints)(nil),                  // 3: thermostat.SetPoints
+	(*DeviceId)(nil),                   // 4: thermostat.DeviceId
+	(*IndoorTemperatueUpdated)(nil),    // 5: thermostat.IndoorTemperatueUpdated
+	(*Temperature)(nil),                // 6: thermostat.Temperature
+	(*Event)(nil),                      // 7: thermostat.Event
 }
-var file_proto_thermostat_proto_depIdxs = []int32{
-	3, // 0: thermostat.TemperatureSetPointUpdated.device_id:type_name -> thermostat.DeviceId
-	2, // 1: thermostat.TemperatureSetPointUpdated.set_points:type_name -> thermostat.SetPoints
-	5, // 2: thermostat.SetPoints.cool_set_point:type_name -> thermostat.Temperature
-	5, // 3: thermostat.SetPoints.heat_set_point:type_name -> thermostat.Temperature
-	3, // 4: thermostat.IndoorTemperatueUpdated.device_id:type_name -> thermostat.DeviceId
-	5, // 5: thermostat.IndoorTemperatueUpdated.temperature:type_name -> thermostat.Temperature
-	0, // 6: thermostat.Temperature.scale:type_name -> thermostat.Temperature.Scale
-	1, // 7: thermostat.Event.set_points_updated:type_name -> thermostat.TemperatureSetPointUpdated
-	4, // 8: thermostat.Event.indoor_temperature_updated:type_name -> thermostat.IndoorTemperatueUpdated
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+var file_thermostat_proto_depIdxs = []int32{
+	7,  // 0: thermostat.DeviceMessage.event:type_name -> thermostat.Event
+	4,  // 1: thermostat.TemperatureSetPointUpdated.device_id:type_name -> thermostat.DeviceId
+	3,  // 2: thermostat.TemperatureSetPointUpdated.set_points:type_name -> thermostat.SetPoints
+	6,  // 3: thermostat.SetPoints.cool_set_point:type_name -> thermostat.Temperature
+	6,  // 4: thermostat.SetPoints.heat_set_point:type_name -> thermostat.Temperature
+	4,  // 5: thermostat.IndoorTemperatueUpdated.device_id:type_name -> thermostat.DeviceId
+	6,  // 6: thermostat.IndoorTemperatueUpdated.temperature:type_name -> thermostat.Temperature
+	0,  // 7: thermostat.Temperature.scale:type_name -> thermostat.Temperature.Scale
+	2,  // 8: thermostat.Event.set_points_updated:type_name -> thermostat.TemperatureSetPointUpdated
+	5,  // 9: thermostat.Event.indoor_temperature_updated:type_name -> thermostat.IndoorTemperatueUpdated
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
-func init() { file_proto_thermostat_proto_init() }
-func file_proto_thermostat_proto_init() {
-	if File_proto_thermostat_proto != nil {
+func init() { file_thermostat_proto_init() }
+func file_thermostat_proto_init() {
+	if File_thermostat_proto != nil {
 		return
 	}
-	file_proto_thermostat_proto_msgTypes[0].OneofWrappers = []any{}
-	file_proto_thermostat_proto_msgTypes[1].OneofWrappers = []any{}
-	file_proto_thermostat_proto_msgTypes[2].OneofWrappers = []any{}
-	file_proto_thermostat_proto_msgTypes[3].OneofWrappers = []any{}
-	file_proto_thermostat_proto_msgTypes[4].OneofWrappers = []any{}
-	file_proto_thermostat_proto_msgTypes[5].OneofWrappers = []any{
+	file_thermostat_proto_msgTypes[1].OneofWrappers = []any{}
+	file_thermostat_proto_msgTypes[2].OneofWrappers = []any{}
+	file_thermostat_proto_msgTypes[3].OneofWrappers = []any{}
+	file_thermostat_proto_msgTypes[4].OneofWrappers = []any{}
+	file_thermostat_proto_msgTypes[5].OneofWrappers = []any{}
+	file_thermostat_proto_msgTypes[6].OneofWrappers = []any{
 		(*Event_SetPointsUpdated)(nil),
 		(*Event_IndoorTemperatureUpdated)(nil),
 	}
@@ -522,18 +579,18 @@ func file_proto_thermostat_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_thermostat_proto_rawDesc), len(file_proto_thermostat_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_thermostat_proto_rawDesc), len(file_thermostat_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_proto_thermostat_proto_goTypes,
-		DependencyIndexes: file_proto_thermostat_proto_depIdxs,
-		EnumInfos:         file_proto_thermostat_proto_enumTypes,
-		MessageInfos:      file_proto_thermostat_proto_msgTypes,
+		GoTypes:           file_thermostat_proto_goTypes,
+		DependencyIndexes: file_thermostat_proto_depIdxs,
+		EnumInfos:         file_thermostat_proto_enumTypes,
+		MessageInfos:      file_thermostat_proto_msgTypes,
 	}.Build()
-	File_proto_thermostat_proto = out.File
-	file_proto_thermostat_proto_goTypes = nil
-	file_proto_thermostat_proto_depIdxs = nil
+	File_thermostat_proto = out.File
+	file_thermostat_proto_goTypes = nil
+	file_thermostat_proto_depIdxs = nil
 }

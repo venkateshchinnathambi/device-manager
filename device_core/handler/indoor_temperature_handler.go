@@ -15,6 +15,7 @@ type IndoorTemperatureHandler struct{}
 type IndoorTemperature struct {
 	ZoneId      string
 	ZoneName    string
+	DeviceID    string
 	Temperature string
 }
 
@@ -37,6 +38,7 @@ func (h *IndoorTemperatureHandler) Handle(msg proto.Message) error {
 	jsonMsg := IndoorTemperature{
 		ZoneId:      "1",
 		ZoneName:    "Living Room",
+		DeviceID:    idt.GetDeviceId().GetId(),
 		Temperature: idt.GetTemperature().GetValue(),
 	}
 	msgBytes, err := json.Marshal(jsonMsg)

@@ -4,6 +4,7 @@ go 1.22.2
 
 require (
 	github.com/confluentinc/confluent-kafka-go/v2 v2.10.1
+	github.com/golang-jwt/jwt/v5 v5.2.2
 	google.golang.org/protobuf v1.36.6
 	gorm.io/driver/postgres v1.4.5
 	gorm.io/gorm v1.25.6

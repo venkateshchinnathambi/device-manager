@@ -71,9 +71,11 @@ services:
     ports:
       - "7778:7777"
     #volumes:
-    #  - .:/app
+    #  - ./ssl/:/app/ssl
     environment:
       - GO_ENV=development
+      - SECRET_KEY_BASE=a7aa7ea2608386f9d49b05e7062667b3c745574d8e04d7393b689a8f48100f42d1e212bf8690543c9a06d7c33c9e307fc8a1373fe99729cd1cfb5d98008499e9
+     
 
   kafka:
     image: confluentinc/cp-kafka:7.2.1

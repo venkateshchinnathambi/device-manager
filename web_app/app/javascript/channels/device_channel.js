@@ -1,6 +1,7 @@
 import consumer from "channels/consumer"
 
-consumer.subscriptions.create("DeviceChannel", {
+consumer.subscriptions.create(
+  {channel: "DeviceChannel",device_id: "1234"}, {
   connected() {
     // Called when the subscription is ready for use on the server
      console.log("Connect to DeviceChannel")

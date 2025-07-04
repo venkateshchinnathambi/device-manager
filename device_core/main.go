@@ -13,6 +13,10 @@ func main() {
 	utils.InitDB()
 	utils.DB.AutoMigrate(&models.IndoorTemperature{})
 	utils.InitKafkaProducer()
+	err := utils.InitPublicKey("/app/ssl/server.crt")
+	if err != nil {
+		log.Fatal("Could not load public key:", err)
+	}
 	listner, err := net.Listen("tcp", "0.0.0.0:7777")
 	if err != nil {
 		log.Fatalf("Error option TCP on 7777")
