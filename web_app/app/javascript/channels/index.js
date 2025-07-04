@@ -1,2 +1,2 @@
 // Import all the channels to be used by Action Cable
-import "channels/thermostat_channel"
+import "channels/device_channel"

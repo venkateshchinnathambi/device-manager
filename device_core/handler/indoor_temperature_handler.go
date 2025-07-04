@@ -43,6 +43,6 @@ func (h *IndoorTemperatureHandler) Handle(msg proto.Message) error {
 	if err != nil {
 		return fmt.Errorf("encoding error %v", err)
 	}
-	utils.SendKafkaMessage("thermostat.updates", string(msgBytes))
+	utils.SendKafkaMessage("devices.updates", string(msgBytes))
 	return nil
 }
