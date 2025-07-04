@@ -4,7 +4,10 @@ syntax = "proto3";
 option go_package = "device-manager/proto;thermostatpb";
 package thermostat;
 
-
+message DeviceMessage {
+    string token = 1;
+    Event event = 2;
+}
 message TemperatureSetPointUpdated{
     optional DeviceId device_id =1;
     optional SetPoints set_points =2;

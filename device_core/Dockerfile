@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y \
 
 # Copy go mod files
 COPY go.mod go.sum ./
+
+COPY ssl /app/ssl
+
 RUN go mod download
 
 # Copy application code
@@ -29,6 +32,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y librdkafka1 && apt-get clean
 
 COPY --from=builder /app/thermostat-server .
+
+COPY --from=builder /app/ssl /app/ssl
 
 EXPOSE 7777
 
