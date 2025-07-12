@@ -9,4 +9,3 @@ payload = {
 
 token = JWT.encode(payload, private_key, 'RS256')
 p token
-
