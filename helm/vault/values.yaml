@@ -1,0 +1,46 @@
+server:
+  ha:
+    enabled: true
+    raft:
+      enabled: true
+      config: |
+        ui = true
+
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+        }
+
+        storage "raft" {
+          path = "/vault/data"
+        }
+
+        service_registration "kubernetes" {}
+
+service:
+  type: ClusterIP
+  port: 8200
+serviceAccount:
+  create: true
+  name: vault
+ingress:
+  enabled: false
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80 
+image:
+  repository: hashicorp/vault
+  tag: "1.15"
+  pullPolicy: IfNotPresent
+podSecurityContext:
+  runAsUser: 0
+  fsGroup: 2000
+securityContext:
+  runAsUser: 0
+  fsGroup: 2000
+
+

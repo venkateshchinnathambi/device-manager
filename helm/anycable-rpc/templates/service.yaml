@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "anycable-rpc.fullname" . }}
+  labels:
+    {{- include "anycable-rpc.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.containerPort }}
+      protocol: TCP
+      name: grpc
+  selector:
+    {{- include "anycable-rpc.selectorLabels" . | nindent 4 }}

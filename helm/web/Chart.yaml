@@ -1,0 +1,10 @@
+apiVersion: v2
+name: web
+description: Web application for device manager
+
+type: application
+
+version: 0.1.0
+
+
+appVersion: "1.16.0"
