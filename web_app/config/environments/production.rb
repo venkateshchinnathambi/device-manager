@@ -78,7 +78,7 @@ Rails.application.configure do
 # config.action_cable.mount_path = '/cable'
 config.public_file_server.enabled = true
 
-#config.action_cable.url = "ws://localhost:3334/cable"
+# config.action_cable.url = "ws://localhost:3334/cable"
 config.action_cable.url = "ws://localhost:4444/cable"
 
 

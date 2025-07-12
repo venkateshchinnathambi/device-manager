@@ -1,7 +1,7 @@
 class DeviceChannel < ApplicationCable::Channel
   def subscribed
      device_id = params[:device_id]
-     #device_id = "1234"
+     # device_id = "1234"
      if device_id.present?
      stream_from "devices:#{device_id}"
      else
