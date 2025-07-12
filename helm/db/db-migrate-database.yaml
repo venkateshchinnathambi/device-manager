@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: device-manager-db-migrate
+  namespace: device-manager
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: db-migrate
+          image: 109038806414.dkr.ecr.ap-south-1.amazonaws.com/device-manager-web:latest
+          command: ["bundle", "exec", "rails", "db:migrate"]
+          env:
+            - name: RAILS_ENV
+              value: production
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret-key
+                  key: RAILS_MASTER_KEY
+            - name: RAILS_SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret-key
+                  key: RAILS_SECRET_KEY_BASE
+            - name: DATABASE_URL
+              value: "postgres://postgres:venkatesh@device-manager-postgresql:5432/device_manager"
+

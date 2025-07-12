@@ -1,12 +1,27 @@
 
 services:
 
+  vault:
+   image: hashicorp/vault:1.15
+   container_name: vault
+   ports:
+    - "8200:8200"
+   volumes:
+    - ./vault/vault-config.hcl:/vault/config/vault-config.hcl
+    - vault-data:/vault/data
+   command: vault server -config=/vault/config/vault-config.hcl
+   cap_add:
+    - IPC_LOCK
+   environment:
+    VAULT_ADDR: "http://0.0.0.0:8200"
+
+
   redis:
     image: redis:7
     ports:
       - "6379:6379"
 
-  db:
+  postgres:
     image: postgres:15
     environment:
       POSTGRES_DB: device_manager
@@ -26,10 +41,10 @@ services:
     ports:
       - "3010:3010"     
     depends_on:
-      - db
+      - postgres
       - redis
     environment:
-      - PG_HOST=db
+      - PG_HOST=postgres
       - PG_USER=postgres
       - PG_PASSWORD=venkatesh
       - PG_DB=device_manager
@@ -37,11 +52,11 @@ services:
       - REDIS_URL=redis://redis:6379/1
       - ANYCABLE_RPC_SECRET=42dc970ba19a926c1bfdf752f19b7fe0
       - ANYCABLE_RPC_HOST=anycable-rpc:50051
-      - DATABASE_URL=postgres://postgres:venkatesh@db:5432/device_manager
+      - DATABASE_URL=postgres://postgres:venkatesh@postgres:5432/device_manager
       - RAILS_ENV=production
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=venkatesh
-      - POSTGRES_HOST=db
+      - POSTGRES_HOST=postgres
       - RAILS_MASTER_KEY="e0c91999021681e45fbd887b3cf34201"
    
 
@@ -66,7 +81,7 @@ services:
       context: ./device_core
       dockerfile: Dockerfile
     depends_on:
-      - db
+      - postgres
       - kafka
     ports:
       - "7778:7777"
@@ -119,7 +134,7 @@ services:
       - ./web_app:/app
     depends_on:
       - redis
-      - db
+      - postgres
     environment:
       - REDIS_URL=redis://redis:6379/1       
       - RAILS_ENV=production
@@ -171,3 +186,5 @@ volumes:
   thermostat_db_data:
   influxdb_data:
   grafana_data:
+  vault-data:
+

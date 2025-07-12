@@ -11,11 +11,11 @@ services:
     command: bundle exec rails server -b 0.0.0.0 -p 3010
  
     depends_on:
-      - db
+      - postgres
     environment:
       DATABASE_URL: postgres://postgres:venkatesh@db:5432/device_manager
       RAILS_ENV: production
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: venkatesh
-      POSTGRES_HOST: db
+      POSTGRES_HOST: postgres
       RAILS_MASTER_KEY: "e0c91999021681e45fbd887b3cf34201"

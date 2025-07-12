@@ -45,3 +45,8 @@ message Event{
         IndoorTemperatueUpdated indoor_temperature_updated = 2;
     }
 }
+
+message UpdateTemperatureSetPoint {
+    optional DeviceId device_id = 1;
+    optional SetPoints set_points = 2;
+}

@@ -1,0 +1,159 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2025-07-11T08:01:47Z"
+  generateName: device-manager-web-58fc754cf8-
+  labels:
+    app: web
+    pod-template-hash: 58fc754cf8
+  name: device-manager-web-58fc754cf8-c9jr4
+  namespace: device-manager
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: device-manager-web-58fc754cf8
+    uid: 59a68030-2be2-462c-ade1-0e133eba32de
+  resourceVersion: "30349"
+  uid: b446cb2a-bfb2-44de-b154-8b9e119efa9c
+spec:
+  containers:
+  - env:
+    - name: RAILS_ENV
+      value: production
+    - name: RAILS_SECRET_KEY_BASE
+      valueFrom:
+        secretKeyRef:
+          key: RAILS_SECRET_KEY_BASE
+          name: rails-secret-key
+    image: 109038806414.dkr.ecr.ap-south-1.amazonaws.com/device-manager-web:latest
+    imagePullPolicy: Always
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: http
+        scheme: HTTP
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: web
+    ports:
+    - containerPort: 3000
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: http
+        scheme: HTTP
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xwwch
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: ip-192-168-18-95.ap-south-1.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: device-manager-web
+  serviceAccountName: device-manager-web
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-xwwch
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-07-11T08:01:49Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-07-11T08:01:47Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-07-11T08:01:47Z"
+    message: 'containers with unready status: [web]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-07-11T08:01:47Z"
+    message: 'containers with unready status: [web]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-07-11T08:01:47Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://3abad520cd64a81b5886920400274041c1bd5cd6a7d8b91d977291d6bd6f141d
+    image: 109038806414.dkr.ecr.ap-south-1.amazonaws.com/device-manager-web:latest
+    imageID: 109038806414.dkr.ecr.ap-south-1.amazonaws.com/device-manager-web@sha256:39e2ddea6740a398efa118785e06f495cb7fbbc13498f744b769e86d1b4c17c6
+    lastState:
+      terminated:
+        containerID: containerd://3abad520cd64a81b5886920400274041c1bd5cd6a7d8b91d977291d6bd6f141d
+        exitCode: 1
+        finishedAt: "2025-07-11T08:07:50Z"
+        reason: Error
+        startedAt: "2025-07-11T08:07:47Z"
+    name: web
+    ready: false
+    restartCount: 6
+    started: false
+    state:
+      waiting:
+        message: back-off 5m0s restarting failed container=web pod=device-manager-web-58fc754cf8-c9jr4_device-manager(b446cb2a-bfb2-44de-b154-8b9e119efa9c)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xwwch
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.18.95
+  hostIPs:
+  - ip: 192.168.18.95
+  phase: Running
+  podIP: 192.168.30.166
+  podIPs:
+  - ip: 192.168.30.166
+  qosClass: BestEffort
+  startTime: "2025-07-11T08:01:47Z"

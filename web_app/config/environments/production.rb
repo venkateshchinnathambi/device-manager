@@ -78,7 +78,8 @@ Rails.application.configure do
 # config.action_cable.mount_path = '/cable'
 config.public_file_server.enabled = true
 
-config.action_cable.url = "ws://localhost:3334/cable"
+#config.action_cable.url = "ws://localhost:3334/cable"
+config.action_cable.url = "ws://localhost:4444/cable"
 
 
 config.action_cable.allowed_request_origins = [
@@ -89,6 +90,8 @@ config.action_cable.allowed_request_origins = [
 # Optional, if behind proxy or Docker bridge
 Rails.application.config.hosts << "localhost"
 Rails.application.config.hosts << "web"
+Rails.application.config.hosts << "127.0.0.1"
+
 config.action_cable.disable_request_forgery_protection = true
 config.after_initialize do
   AnyCable.logger.info "Rails AnyCable RPC server initialized" 

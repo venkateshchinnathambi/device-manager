@@ -1,0 +1,30 @@
+{{- if .Values.dbMigrationJob.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: device-manager-db-migrate
+  namespace: {{ .Release.Namespace }}
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: db-migrate
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command: ["bundle", "exec", "rails", "db:migrate"]
+          env:
+            - name: RAILS_ENV
+              value: "production"
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret-key
+                  key: RAILS_MASTER_KEY
+            - name: RAILS_SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret-key
+                  key: RAILS_SECRET_KEY_BASE
+            - name: DATABASE_URL
+              value: {{ .Values.databaseUrl | quote }}
+{{- end }}
